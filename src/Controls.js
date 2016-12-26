@@ -17,6 +17,7 @@ var Controls = React.createClass({
 		return (
             <MuiThemeProvider>
                 <div className="controls">
+				{this.props.chartType === 'ScatterPlot' &&
                     <SelectField
                         floatingLabelText="X Axis Variable"
                         value={this.props.xVar}
@@ -26,6 +27,7 @@ var Controls = React.createClass({
                         <MenuItem value={'Expenditure'} primaryText="Expenditure" />
 						<MenuItem value={'Population'} primaryText="Population" />
                     </SelectField>
+				}
                     <SelectField
                         floatingLabelText="Y Axis Variable"
                         value={this.props.yVar}
@@ -36,6 +38,15 @@ var Controls = React.createClass({
 					<MenuItem value={'Population'} primaryText="Population" />
 
 					</SelectField>
+					<SelectField
+                        floatingLabelText="Type of Chart"
+                        value={this.props.chartType}
+                        onChange={this.props.changeChart}
+                    >
+					<MenuItem value={'ScatterPlot'} primaryText="ScatterPlot" />
+					<MenuItem value={'BarChart'} primaryText="BarChart" />
+					</SelectField>
+
                     <br/>
                     <TextField
                         hintText="Find a state"
