@@ -5,4 +5,4 @@ Forked from [Michael Freeman's strata-2016 demo](http://mfviz.com/strata-2016/de
 
 The site is live [here](https://reactd3.herokuapp.com/) :
 
-![life expectancy scatter plot](imgs/demo-5.png)
+![State Income and Expenditure Per Capita / With Population](imgs/viz.png)
