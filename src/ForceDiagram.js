@@ -5,7 +5,6 @@ var ForceDiagram = function(){
     var height = 500,
         width = 500,
         xScale = d3.scaleLinear(),
-        yScale = d3.scaleLinear(),
         xTitle = 'X Axis Title',
         yTitle = 'Y Axis Title',
         fill = (d) => 'blue',
@@ -19,7 +18,7 @@ var ForceDiagram = function(){
         // Function returned by ScatterPlot
         var chart = function(selection) {
             // Height/width of the drawing area itself
-            var chartHeight = height/2 - margin.bottom - margin.top;
+            var chartHeight = height*.77 - margin.bottom - margin.top;
             var chartWidth = width - margin.left - margin.right;
 
             // Iterate through selections, in case there are multiple
@@ -108,14 +107,15 @@ var ForceDiagram = function(){
                       .on('mouseover', tip.show)
                       .on('mouseout', tip.hide)
                       .attr("cx", function(d) {return xScale(0); })
-                      .attr("cy", function(d) { return chartHeight })
+
+                      .attr("cy", function(d) { return chartHeight - (Math.floor(Math.random() * 30) + 5)   })
                       .merge(cell)
+                      .attr('fill', fill)
                       .transition()
                       .duration(1500)
                       .delay((d) => xScale(d.x) * 2)
-                      .attr('fill', fill)
                       .attr("cx", function(d) {return xScale(d.x); })
-                      .attr("cy", function(d) { return chartHeight })
+                      .attr("cy", function(d) { return chartHeight - (Math.floor(Math.random() * 30) + 5) })
                       .text((d) => d.id );
 
 

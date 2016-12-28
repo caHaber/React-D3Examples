@@ -70,10 +70,13 @@ var BarChart = function(){
                           .attr('class', 'd3-tip')
                           .offset([-10, 0])
                           .html(function(d) {
-                            return "<strong>" + d.id + "</strong>";
+                            return "<strong>" + d.y + " : " + d.id + "</strong>";
                           });
 
                 ele.select('svg').call(tip);
+
+                //Sorts data on descending
+                data.sort((x,y) => d3.descending(x.y, y.y));
 
                 xScale.rangeRound([0, chartWidth]).domain(data.map((d) => d.id));
 

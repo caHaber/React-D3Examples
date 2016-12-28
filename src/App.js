@@ -127,8 +127,9 @@ var App = React.createClass({
                         height={window.innerHeight - 220} />
                 </div>
             }
-
+                <p> * This data is not entirely correct; mainly educational purpose.</p>
             </div>
+
 		);
 	}
 });
