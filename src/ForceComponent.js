@@ -7,7 +7,7 @@ import ForceDiagram from './ForceDiagram';
 // Scatterplot component
 var ForceComponent = React.createClass({
     componentDidMount(){
-        // Define scatterplot function
+        // Define dotplotlike thing function
         this.scatter = ForceDiagram();
         this.update();
     },

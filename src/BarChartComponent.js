@@ -1,13 +1,13 @@
-// Scatterplot
+// BarChart
 import React from 'react';
 import * as d3 from 'd3';
 import './ScatterPlot.css';
 import BarChart from './BarChart';
 
-// Scatterplot component
+// BarChart component
 var BarChartComponent = React.createClass({
     componentDidMount(){
-        // Define scatterplot function
+        // Define BarChart' function
         this.bar = BarChart();
         this.update();
     },
