@@ -4,6 +4,7 @@ import * as d3 from 'd3';
 import './App.css';
 import ScatterPlotComponent from './ScatterPlotComponent'
 import BarChartComponent from './BarChartComponent'
+import ForceComponent from './ForceComponent'
 import Controls from './Controls';
 
 var App = React.createClass({
@@ -14,7 +15,9 @@ var App = React.createClass({
             yVar:'Expenditure',
             idVar:'State',
             search:'',
-            chartType: 'BarChart'
+            chartType: 'ForceDiagram',
+            searchType: 'color',
+            stateStats: ''
         }
     },
     componentWillMount() {
@@ -35,17 +38,35 @@ var App = React.createClass({
     changeChart(event, index, value){
         this.setState({chartType:value})
     },
+    changeFilter(event, index, value){
+        this.setState({searchType:value})
+    },
 	render() {
         // Prep data
-        let chartData = this.state.data.map((d) => {
-            let selected = d[this.state.idVar].toLowerCase().match(this.state.search) !== null;
-            return {
-                x:d[this.state.xVar],
-                y:d[this.state.yVar],
-                id:d[this.state.idVar],
-                selected:selected
-            }
-        }).filter((d) => { return d.selected });
+        let chartData;
+        if (this.state.searchType === 'color'){
+            chartData = this.state.data.map((d) => {
+                let selected = d[this.state.idVar].toLowerCase().match(this.state.search) !== null;
+                return {
+                    x:d[this.state.xVar],
+                    y:d[this.state.yVar],
+                    id:d[this.state.idVar],
+                    selected:selected
+                }
+            });
+        } else {
+            chartData = this.state.data.map((d) => {
+                let selected = d[this.state.idVar].toLowerCase().match(this.state.search) !== null;
+                return {
+                    x:d[this.state.xVar],
+                    y:d[this.state.yVar],
+                    id:d[this.state.idVar],
+                    selected:selected
+                }
+            }).filter((d) => { return d.selected });
+        }
+        //Line that filters instead of turning non-selected red
+        // .filter((d) => { return d.selected });
 
         let titleMap = {
             Expenditure:'Expenditure',
@@ -61,7 +82,7 @@ var App = React.createClass({
 		// Return ScatterPlot element
 		return (
             <div>
-                <h1 className="header">Sample States Education Exp, with pop</h1>
+                <h1 className="header">Sample States Education Expenditure & Income perCapita, sized by population </h1>
                 <Controls
                     changeX={this.changeX}
                     changeY={this.changeY}
@@ -70,6 +91,8 @@ var App = React.createClass({
                     search={this.search}
                     chartType={this.state.chartType}
                     changeChart={this.changeChart}
+                    changeFilter={this.changeFilter}
+                    searchType={this.state.searchType}
                 />
             {this.state.chartType === 'ScatterPlot' &&
                     <div className="App">
@@ -85,6 +108,17 @@ var App = React.createClass({
             {this.state.chartType === 'BarChart' &&
                 <div className="App">
                     <BarChartComponent
+                        xTitle={titles.x}
+                        yTitle={titles.y}
+                        search={this.state.search}
+                        data={chartData}
+                        width={window.innerWidth * .7}
+                        height={window.innerHeight - 220} />
+                </div>
+            }
+            {this.state.chartType === 'ForceDiagram' &&
+                <div className="App">
+                    <ForceComponent
                         xTitle={titles.x}
                         yTitle={titles.y}
                         search={this.state.search}

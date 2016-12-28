@@ -45,6 +45,15 @@ var Controls = React.createClass({
                     >
 					<MenuItem value={'ScatterPlot'} primaryText="ScatterPlot" />
 					<MenuItem value={'BarChart'} primaryText="BarChart" />
+					<MenuItem value={'ForceDiagram'} primaryText="ForceDiagram" />
+					</SelectField>
+					<SelectField
+						floatingLabelText="Filter Type"
+						value={this.props.searchType}
+						onChange={this.props.changeFilter}
+					>
+					<MenuItem value={'color'} primaryText="color nodes" />
+					<MenuItem value={'erase'} primaryText="remove nodes" />
 					</SelectField>
 
                     <br/>

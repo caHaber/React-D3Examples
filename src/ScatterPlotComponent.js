@@ -19,7 +19,7 @@ var ScatterPlotComponent = React.createClass({
             .height(this.props.height)
             .xTitle(this.props.xTitle)
             .yTitle(this.props.yTitle)
-            .fill((d) => d.selected == true ? 'blue' : 'red');
+            .fill((d) => d.selected === true ? 'blue' : 'red');
 
         // Call d3 update
         d3.select(this.root)

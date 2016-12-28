@@ -86,7 +86,8 @@ var BarChart = function(){
                 ele.select('.axis.x').transition().duration(1000).call(xAxis)
                 .selectAll("text")
                 .style("text-anchor", "end")
-                .attr("dx", "-.8em") .attr("dy", ".15em")
+                .attr("dx", "-.8em")
+                .attr("dy", ".15em")
                 .attr("transform", "rotate(-45)");
 
                 ele.select('.axis.y').transition().duration(1000).call(yAxis);
@@ -101,7 +102,7 @@ var BarChart = function(){
 
         			.attr('y', chartHeight)
         			.style('opacity', .3)
-        			.attr('x', (d) => xScale(d.x))
+        			.attr('x', (d) => xScale(d.id))
                     .on('mouseover', tip.show)
                     .on('mouseout', tip.hide)
                     // Transition properties of the + update selections
@@ -110,7 +111,7 @@ var BarChart = function(){
                     .attr('width', xScale.bandwidth() * .95)
                     .attr('fill', fill)
         			.transition()
-        			// .duration(1500)
+        			.duration(1500)
                     // .delay((d) => xScale(d.x) * 2)
                     .attr('x', (d) => xScale(d.id))
                     .attr('y', (d) => yScale(d.y))

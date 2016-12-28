@@ -115,6 +115,10 @@ var ScatterPlot = function() {
     			.attr('cx', (d) => xScale(d.x))
                 .on('mouseover', tip.show)
                 .on('mouseout', tip.hide)
+                //Have to figure out where function click is needed,
+                // .on("click", function(d) {
+                //     this.handleClick(); // my react method
+                // }.bind(this))
                 // Transition properties of the + update selections
                 .merge(circles)
                 // .attr('r', (d) => radiusScale(d.y))

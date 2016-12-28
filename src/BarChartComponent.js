@@ -8,23 +8,23 @@ import BarChart from './BarChart';
 var BarChartComponent = React.createClass({
     componentDidMount(){
         // Define scatterplot function
-        this.scatter = BarChart();
+        this.bar = BarChart();
         this.update();
     },
     // Create chart
     update() {
         // Update parameters
-        this.scatter
+        this.bar
             .width(this.props.width)
             .height(this.props.height)
             .xTitle('State')
             .yTitle(this.props.yTitle)
-            .fill((d) => d.selected == true ? 'blue' : 'red');
+            .fill((d) => d.selected === true ? 'blue' : 'red');
 
         // Call d3 update
         d3.select(this.root)
             .datum(this.props.data)
-            .call(this.scatter);
+            .call(this.bar);
     },
     // Update on new props
     componentWillReceiveProps (props){
