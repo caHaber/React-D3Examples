@@ -17,7 +17,6 @@ var ForceComponent = React.createClass({
         this.scatter
             .width(this.props.width)
             .height(this.props.height)
-            .log(this.props.log)
             .xTitle(this.props.xTitle)
             .yTitle(this.props.yTitle)
             .fill((d) => d.selected === true ? 'blue' : 'red');
@@ -37,9 +36,6 @@ var ForceComponent = React.createClass({
 		// Expose HTML node via ref property
 		return (
             <div>
-                <div
-                    className={this.props.log}
-                />
                 <div
                     className="chart"
                     width={this.props.width}

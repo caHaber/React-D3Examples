@@ -15,7 +15,7 @@ var App = React.createClass({
             yVar:'Expenditure',
             idVar:'State',
             search:'',
-            chartType: 'ForceDiagram',
+            chartType: 'BarChart',
             searchType: 'color',
             stateStats: ''
         }

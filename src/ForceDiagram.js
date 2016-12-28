@@ -4,11 +4,10 @@ import d3tip from 'd3-tip';
 var ForceDiagram = function(){
     var height = 500,
         width = 500,
-        xScale = d3.scaleLog(),
+        xScale = d3.scaleLinear(),
         yScale = d3.scaleLinear(),
         xTitle = 'X Axis Title',
         yTitle = 'Y Axis Title',
-        log,
         fill = (d) => 'blue',
         margin = {
             left:70,
@@ -20,7 +19,7 @@ var ForceDiagram = function(){
         // Function returned by ScatterPlot
         var chart = function(selection) {
             // Height/width of the drawing area itself
-            var chartHeight = height - margin.bottom - margin.top;
+            var chartHeight = height/2 - margin.bottom - margin.top;
             var chartWidth = width - margin.left - margin.right;
 
             // Iterate through selections, in case there are multiple
@@ -52,7 +51,7 @@ var ForceDiagram = function(){
 
                 // Add a title g for the x axis
                 gEnter.append('text')
-                    .attr('transform', 'translate(' + (margin.left + chartWidth/2) + ',' + (chartHeight + margin.top + 40) + ')')
+                    .attr('transform', 'translate(' + (margin.left + chartWidth) + ',' + (chartHeight + margin.top + 40) + ')')
                     .attr('class', 'title x');
 
                 // Add a title g for the y axis
@@ -64,7 +63,7 @@ var ForceDiagram = function(){
                           .attr('class', 'd3-tip')
                           .offset([-10, 0])
                           .html(function(d) {
-                            return "<strong>" + d.id + "</strong>";
+                            return "<strong>" + d.id + " - " + d.x + "</strong>";
                           });
 
                 ele.select('svg').call(tip);
@@ -89,39 +88,41 @@ var ForceDiagram = function(){
                 ele.select('.axis.x').transition().duration(1000).call(xAxis)
 
 
-                var newdata = data.map((d) => d);
 
-                var simulation = d3.forceSimulation([newdata])
-                      .force("x", d3.forceX(function(d) {return xScale(d.x); }).strength(1))
-                      .force("y", d3.forceY(height / 2))
-                      .force("collide", d3.forceCollide(4))
-                      .stop();
 
-                  for (var i = 0; i < 120; ++i) simulation.tick();
+                // var simulation = d3.forceSimulation(newdata)
+                //       .force("x", d3.forceX(function(d) {return xScale(d.x); }).strength(1))
+                //       .force("y", d3.forceY(chartHeight / 2))
+                //       .force("collide", d3.forceCollide(4))
+                //       .stop();
+                //
+                //   for (var i = 0; i < 120; ++i) simulation.tick();
 
-                  let cell = ele.select('.chartG')
-                  .attr("class", "cells")
-                .selectAll("circle").data(newdata, (d) => d.id);
 
-                  var formatValue = d3.format(",d");
 
+                let cell = ele.select('.chartG').selectAll('circle').data(data, (d) => d.id);
 
                   cell.enter().append("circle")
-                      .attr("r", 3)
-                      .attr("cx", function(d) {return xScale(d.x); })
-                      .attr("cy", function(d) { return 0; })
+                      .attr("r", 6)
+                      .style('opacity', .3)
+                      .on('mouseover', tip.show)
+                      .on('mouseout', tip.hide)
+                      .attr("cx", function(d) {return xScale(0); })
+                      .attr("cy", function(d) { return chartHeight })
                       .merge(cell)
+                      .transition()
+                      .duration(1500)
+                      .delay((d) => xScale(d.x) * 2)
+                      .attr('fill', fill)
                       .attr("cx", function(d) {return xScale(d.x); })
-                      .attr("cy", function(d) { return 100; });
+                      .attr("cy", function(d) { return chartHeight })
+                      .text((d) => d.id );
 
 
-                      cell.exit().remove();
-                  //
-                //   cell.append("path")
-                //       .attr("d", function(d) { return "M" + d.join("L") + "Z"; });
-                  //
-                //   cell.append("title")
-                //       .text(function(d) { return d.data.id + "\n" + formatValue(d.data.x); });
+
+                    cell.exit().remove();
+
+
             });
         };
 
@@ -152,12 +153,6 @@ var ForceDiagram = function(){
         chart.yTitle = function(value){
             if (!arguments.length) return yTitle;
             yTitle = value;
-            return chart;
-        };
-
-        chart.log = function(value){
-            if (!arguments.length) return log;
-            log = value;
             return chart;
         };
 

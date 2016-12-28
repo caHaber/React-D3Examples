@@ -17,7 +17,7 @@ var Controls = React.createClass({
 		return (
             <MuiThemeProvider>
                 <div className="controls">
-				{this.props.chartType === 'ScatterPlot' &&
+				{this.props.chartType !== 'BarChart' &&
                     <SelectField
                         floatingLabelText="X Axis Variable"
                         value={this.props.xVar}
