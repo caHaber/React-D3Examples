@@ -30,7 +30,7 @@ var Controls = React.createClass({
 					>
 					<MenuItem value={'ScatterPlot'} primaryText="ScatterPlot" />
 					<MenuItem value={'BarChart'} primaryText="BarChart" />
-					<MenuItem value={'ForceDiagram'} primaryText="ForceDiagram" />
+					<MenuItem value={'ForceDiagram'} primaryText="DotPlot" />
 					</SelectField>
 				{this.props.chartType === 'ScatterPlot' &&
 	                    [<SelectField

@@ -127,7 +127,9 @@ var App = React.createClass({
                         height={window.innerHeight - 220} />
                 </div>
             }
-                <p> * This data is not entirely correct; mainly educational purpose.</p>
+                <p className="info">This is a learning experiment for increasing my own knowledge of both d3 and React.
+                 The data is from the 2010 census, but again this graph is for educational purposes.
+              Please see my <a href="http://www.github.com/caHaber">github account</a> for more information.</p>
             </div>
 
 		);
