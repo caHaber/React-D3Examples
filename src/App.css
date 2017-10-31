@@ -1,12 +1,13 @@
 h1 {
     text-align:left;
-    margin-left:100px;
-    margin-right:100px;
+    margin-left:10vw;
+    margin-right:10vw;
     font-weight:300;
     border-bottom:1px solid #d3d3d3;
 }
 
 .info {
-    margin: 100px;
-    margin-right: 50vw;
+    margin-right: 10vw;
+    line-height: 1.5em;
+    margin-left: 10vw;
 }

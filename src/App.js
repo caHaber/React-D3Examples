@@ -82,7 +82,13 @@ var App = React.createClass({
 		// Return ScatterPlot element
 		return (
             <div>
-                <h1 className="header">Sample States Education Expenditure & Income perCapita, sized by population </h1>
+                <h1 className="header">Sample States Education Expenditure | Income perCapita, sized by population </h1>
+                <p className="info">This is a learning experiment for increasing my own knowledge of React controlled d3 visualizations.
+                 The data is from the 2010 census, but again this graph is for educational purposes.
+              Please see my <a href="http://www.github.com/caHaber">github account</a> for more information.
+              
+              </p>
+            
                 <Controls
                     changeX={this.changeX}
                     changeY={this.changeY}
@@ -127,10 +133,7 @@ var App = React.createClass({
                         height={window.innerHeight - 220} />
                 </div>
             }
-                <p className="info">This is a learning experiment for increasing my own knowledge of both d3 and React.
-                 The data is from the 2010 census, but again this graph is for educational purposes.
-              Please see my <a href="http://www.github.com/caHaber">github account</a> for more information.</p>
-            </div>
+    </div>
 
 		);
 	}
